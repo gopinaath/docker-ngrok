@@ -11,8 +11,8 @@ RUN set -x \
  && wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub \
  && wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk \
  && apk add glibc-${GLIBC_VERSION}.apk \
- && apk add --no-cache bash \
- && apk add --no-cache sudo  \
+   # && apk add --no-cache bash \
+   # && apk add --no-cache sudo  \
  && rm glibc-${GLIBC_VERSION}.apk \
  && apk del --purge .deps
 
@@ -22,10 +22,11 @@ RUN set -x \
  && curl -Lo /ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip \
  && unzip -o /ngrok.zip -d /bin \
  && rm -f /ngrok.zip \
- && echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel \
+    # && echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel \
     # Create non-root user.
- && adduser --disabled-password --uid 12345 -h /home/ngrok ngrok \
- && adduser ngrok wheel
+ && adduser -h /home/ngrok -D -u 6737 ngrok
+   # && adduser --disabled-password --uid 12345 -h /home/ngrok ngrok \
+   # && adduser ngrok wheel
 
 # Add config script.
 COPY --chown=ngrok ngrok.yml /home/ngrok/.ngrok2/
@@ -37,7 +38,6 @@ ENV USER=ngrok
 # Basic sanity check.
 RUN ngrok --version
 
-# EXPOSE 4040 9090
 EXPOSE 4040
 
 CMD ["/entrypoint.sh"]

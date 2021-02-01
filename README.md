@@ -110,3 +110,9 @@ Pull requests are very welcome!
 [busybox]:          https://registry.hub.docker.com/_/busybox
 [wizardapps/ngrok]: https://registry.hub.docker.com/u/wizardapps/ngrok/
 [fnichol/ngrok]:    https://registry.hub.docker.com/u/fnichol/ngrok/
+
+
+docker run --rm -it -p 127.0.0.1:4040:4040 -p 127.0.0.1:9090:9090 -e NGROK_DEBUG=true -e NGROK_PORT=host.docker.internal:9090  gopinaath/docker-ngrok ngrok -log_level=debug http -host-header=rewrite host.docker.internal:9090
+
+## Works with external URL
+docker run --rm -it --privileged -p 127.0.0.1:4040:4040  -e NGROK_DEBUG=true -e NGROK_PORT=host.docker.internal:9090  gopinaath/docker-ngrok 

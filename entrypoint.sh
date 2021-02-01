@@ -31,6 +31,11 @@ if [ -n "$NGROK_BINDTLS" ]; then
   ARGS="$ARGS -bind-tls=$NGROK_BINDTLS "
 fi
 
+# Set the TLS binding flag
+if [ -n "$NGROK_HOSTHEADER" ]; then
+  ARGS="$ARGS -host-header=$NGROK_HOSTHEADER "
+fi
+
 # Set the authorization token.
 if [ -n "$NGROK_AUTH" ]; then
   echo "authtoken: $NGROK_AUTH" >> ~/.ngrok2/ngrok.yml

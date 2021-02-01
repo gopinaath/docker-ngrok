@@ -31,8 +31,8 @@ RUN set -x \
 COPY --chown=ngrok ngrok.yml /home/ngrok/.ngrok2/
 COPY entrypoint.sh /
 
-USER root
-ENV USER=root
+USER ngrok
+ENV USER=ngrok
 
 # Basic sanity check.
 RUN ngrok --version

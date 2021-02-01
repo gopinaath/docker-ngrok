@@ -116,3 +116,9 @@ docker run --rm -it -p 127.0.0.1:4040:4040 -p 127.0.0.1:9090:9090 -e NGROK_DEBUG
 
 ## Works with external URL
 docker run --rm -it --privileged -p 127.0.0.1:4040:4040  -e NGROK_DEBUG=true -e NGROK_PORT=host.docker.internal:9090  gopinaath/docker-ngrok 
+
+docker run --rm -it --privileged -p 127.0.0.1:4040:4040  -e NGROK_DEBUG=true -e NGROK_PORT=host.docker.internal:9090  gopinaath/docker-ngrok ngrok http host.docker.internal:9090
+
+## 
+after reverting to user ngrok
+ docker run --rm -it --privileged -p 127.0.0.1:4040:4040  -e NGROK_DEBUG=true -e NGROK_PORT=host.docker.internal:9090  gopinaath/docker-ngrok ngrok http host.docker.internal:9090
